@@ -108,7 +108,7 @@
 
 <br/>
 
-[Overview](#-overview) • [Quick Start](#-quick-start) • [Docker](#-run-with-docker) • [Cross-Session Memory](#-cross-session-memory) • [MCP Server](#-mcp-server) • [Evaluation](#-evaluation) • [Citation](#-citation)
+[Overview](#-overview) • [Quick Start](#-quick-start) • [Docker](#-run-with-docker) • [Omni-SimpleMem](#-omni-simplemem-multimodal-memory) • [Cross-Session Memory](#-cross-session-memory) • [MCP Server](#-mcp-server) • [Evaluation](#-evaluation) • [Citation](#-citation)
 
 </div>
 
@@ -118,6 +118,7 @@
 
 ## 🔥 News
 
+- **[04/02/2026]** 🧠 **Omni-SimpleMem — Multimodal Memory is Here!** SimpleMem now supports **text, image, audio & video** memory. Achieving **+411% on LoCoMo** and **+214% on Mem-Gallery** over previous baselines, Omni-SimpleMem brings state-of-the-art multimodal lifelong memory to your agents. [View Omni-SimpleMem →](OmniSimpleMem/)
 - **[02/09/2026]** 🚀 **Cross-Session Memory is Here — Outperforming Claude-Mem by 64%!** SimpleMem now supports **persistent memory across conversations**. On the LoCoMo benchmark, SimpleMem achieves a **64% performance boost** over Claude-Mem. Your agents can now recall context, decisions, and learnings from previous sessions automatically. [View Cross-Session Documentation →](cross/README.md)
 - **[01/20/2026]** **SimpleMem is now available on PyPI!** 📦 Install directly via `pip install simplemem`. [View Package Usage Guide →](docs/PACKAGE_USAGE.md)
 - **[01/19/2026]** **Added Local Memory Storage for SimpleMem Skill!** 💾 SimpleMem Skill now supports local memory storage within Claude Skills.
@@ -136,7 +137,8 @@
 - [📦 Installation](#-installation)
 - [🐳 Run with Docker](#-run-with-docker)
 - [⚡ Quick Start](#-quick-start)
-- [🧠 Cross-Session Memory](#-cross-session-memory)
+- [🧠 Omni-SimpleMem: Multimodal Memory](#-omni-simplemem-multimodal-memory)
+- [🔄 Cross-Session Memory](#-cross-session-memory)
 - [🔌 MCP Server](#-mcp-server)
 - [📊 Evaluation](#-evaluation)
 - [📝 Citation](#-citation)
@@ -501,7 +503,40 @@ If you encounter issues while setting up or running SimpleMem for the first time
 
 ---
 
-## 🧠 Cross-Session Memory
+## 🧠 Omni-SimpleMem: Multimodal Memory
+
+<table>
+<tr>
+<td align="center" width="140">📈 <b>+411%</b><br><sub>LoCoMo F1</sub></td>
+<td align="center" width="140">📈 <b>+214%</b><br><sub>Mem-Gallery F1</sub></td>
+<td align="center" width="140">⚡ <b>5.81 q/s</b><br><sub>3.5x faster</sub></td>
+<td align="center" width="140">🧠 <b>4 modalities</b><br><sub>Text · Image · Audio · Video</sub></td>
+</tr>
+</table>
+
+**Omni-SimpleMem** extends SimpleMem to **unified multimodal memory** — supporting text, image, audio, and video experiences with state-of-the-art accuracy across all five LLM backbones tested.
+
+Built on three principles: **Selective Ingestion** (entropy-driven filtering for each modality), **Progressive Retrieval** (hybrid FAISS + BM25 search with pyramid token-budget expansion), and **Knowledge Graph Augmentation** (multi-hop cross-modal reasoning).
+
+```bash
+cd OmniSimpleMem
+pip install -e .
+```
+
+```python
+from omni_memory import OmniMemoryOrchestrator, OmniMemoryConfig
+
+config = OmniMemoryConfig()
+orchestrator = OmniMemoryOrchestrator(config=config, data_dir="./my_memory")
+orchestrator.add_text("User loves hiking in the Rocky Mountains.", tags=["session_id:D1"])
+result = orchestrator.query("What does the user enjoy?", top_k=5)
+```
+
+> 📖 Full documentation, benchmarks, and architecture details: [**Omni-SimpleMem →**](OmniSimpleMem/)
+
+---
+
+## 🔄 Cross-Session Memory
 
 **SimpleMem-Cross** extends SimpleMem with persistent cross-conversation memory capabilities. Agents can recall context, decisions, and observations from previous sessions — enabling continuity across conversations without manual context re-injection.
 
@@ -662,6 +697,15 @@ If you use SimpleMem in your research, please cite:
   journal={arXiv preprint arXiv:2601.02553},
   year={2025},
   url={https://github.com/aiming-lab/SimpleMem}
+}
+```
+
+```bibtex
+@article{omnisimplemem2026,
+  title   = {{Omni-SimpleMem}: Autoresearch-Guided Discovery of Lifelong Multimodal Agent Memory},
+  author  = {Liu, Jiaqi and Ling, Zipeng and Qiu, Shi and Liu, Yanqing and Han, Siwei and Xia, Peng and Tu, Haoqin and Zheng, Zeyu and Xie, Cihang and Fleming, Charles and Ding, Mingyu and Yao, Huaxiu},
+  journal = {arXiv preprint arXiv:2604.01007},
+  year    = {2026},
 }
 ```
 
