@@ -4,7 +4,7 @@
 
 <div align="center">
 
-## LLM Ajanları için Verimli Yaşam Boyu Bellek
+## LLM Ajanları için Verimli Yaşam Boyu Bellek — Text & Multimodal
 
 <small>Anlamsal kayıpsız sıkıştırma ile uzun vadeli bellekleri depolayın, sıkıştırın ve geri çağırın. Claude, Cursor, LM Studio ve daha fazlasıyla uyumlu.</small>
 
@@ -195,7 +195,30 @@ print(answer)
 
 ---
 
-## 🔌 MCP Sunucusu
+---
+
+<div align="center">
+
+# 🧠 Omni-SimpleMem: Multimodal Memory
+
+**NEW** — SimpleMem now handles text, image, audio & video.
+
+</div>
+
+<table>
+<tr>
+<td align="center" width="140">📈 <b>+411%</b><br><sub>LoCoMo F1</sub></td>
+<td align="center" width="140">📈 <b>+214%</b><br><sub>Mem-Gallery F1</sub></td>
+<td align="center" width="140">⚡ <b>5.81 q/s</b><br><sub>3.5x faster</sub></td>
+<td align="center" width="140">🧠 <b>4 modalities</b><br><sub>Text · Image · Audio · Video</sub></td>
+</tr>
+</table>
+
+> 📖 Full documentation: [**Omni-SimpleMem →**](../../OmniSimpleMem/)
+
+---
+
+## 🔌 MCP Sunucusu *(text memory)*
 
 **🌐 Bulut Hizmeti**: [mcp.simplemem.cloud](https://mcp.simplemem.cloud)
 
@@ -213,6 +236,19 @@ print(answer)
 ```
 
 > 📖 [MCP Dokümantasyonu](../../MCP/README.md)
+
+---
+
+---
+
+## 🗺️ Yol Haritası
+
+- 🔲 Omni cross-session memory
+- 🔲 Omni MCP server
+- 🔲 Omni Docker support
+- 🔲 Omni PyPI package
+- 🔲 Streaming ingestion
+- 🔲 Multi-agent memory sharing
 
 ---
 

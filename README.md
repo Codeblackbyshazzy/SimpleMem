@@ -690,7 +690,7 @@ SimpleMem is available as a **cloud-hosted memory service** via the Model Contex
 - 🔲 Memory sharing across multiple agents
 - 🔲 Benchmark expansion (more multimodal benchmarks)
 
-Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) or open an [issue](https://github.com/aiming-lab/SimpleMem/issues).
+Contributions welcome! Open an [issue](https://github.com/aiming-lab/SimpleMem/issues) to discuss.
 
 ---
 

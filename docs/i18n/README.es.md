@@ -4,7 +4,7 @@
 
 <div align="center">
 
-## Memoria Eficiente de por Vida para Agentes LLM
+## Memoria Eficiente de por Vida para Agentes LLM — Text & Multimodal
 
 <small>Almacena, comprime y recupera memorias a largo plazo con compresión semántica sin pérdidas. Compatible con Claude, Cursor, LM Studio y más.</small>
 
@@ -381,7 +381,30 @@ print(answer)
 
 ---
 
-## 🔌 Servidor MCP
+---
+
+<div align="center">
+
+# 🧠 Omni-SimpleMem: Multimodal Memory
+
+**NEW** — SimpleMem now handles text, image, audio & video.
+
+</div>
+
+<table>
+<tr>
+<td align="center" width="140">📈 <b>+411%</b><br><sub>LoCoMo F1</sub></td>
+<td align="center" width="140">📈 <b>+214%</b><br><sub>Mem-Gallery F1</sub></td>
+<td align="center" width="140">⚡ <b>5.81 q/s</b><br><sub>3.5x faster</sub></td>
+<td align="center" width="140">🧠 <b>4 modalities</b><br><sub>Text · Image · Audio · Video</sub></td>
+</tr>
+</table>
+
+> 📖 Full documentation: [**Omni-SimpleMem →**](../../OmniSimpleMem/)
+
+---
+
+## 🔌 Servidor MCP *(text memory)*
 
 SimpleMem está disponible como **servicio de memoria alojado en la nube** mediante el Model Context Protocol (MCP).
 
@@ -403,6 +426,19 @@ SimpleMem está disponible como **servicio de memoria alojado en la nube** media
 ```
 
 > 📖 Para instrucciones detalladas y guía de auto-alojamiento, consulta la [Documentación MCP](../../MCP/README.md)
+
+---
+
+---
+
+## 🗺️ Hoja de Ruta
+
+- 🔲 Omni cross-session memory
+- 🔲 Omni MCP server
+- 🔲 Omni Docker support
+- 🔲 Omni PyPI package
+- 🔲 Streaming ingestion
+- 🔲 Multi-agent memory sharing
 
 ---
 

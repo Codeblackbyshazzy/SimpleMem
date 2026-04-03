@@ -4,7 +4,7 @@
 
 <div align="center">
 
-## 高效的 LLM 智能体终身记忆系统
+## 高效的 LLM 智能体终身记忆系统 — Text & Multimodal
 
 <small>通过语义无损压缩实现长期记忆的存储、压缩和检索。支持 Claude、Cursor、LM Studio 等多种平台。</small>
 
@@ -434,7 +434,30 @@ system = SimpleMemSystem(
 
 ---
 
-## 🔌 MCP 服务器
+---
+
+<div align="center">
+
+# 🧠 Omni-SimpleMem: Multimodal Memory
+
+**NEW** — SimpleMem now handles text, image, audio & video.
+
+</div>
+
+<table>
+<tr>
+<td align="center" width="140">📈 <b>+411%</b><br><sub>LoCoMo F1</sub></td>
+<td align="center" width="140">📈 <b>+214%</b><br><sub>Mem-Gallery F1</sub></td>
+<td align="center" width="140">⚡ <b>5.81 q/s</b><br><sub>3.5x faster</sub></td>
+<td align="center" width="140">🧠 <b>4 modalities</b><br><sub>Text · Image · Audio · Video</sub></td>
+</tr>
+</table>
+
+> 📖 Full documentation: [**Omni-SimpleMem →**](../../OmniSimpleMem/)
+
+---
+
+## 🔌 MCP 服务器 *(text memory)*
 
 SimpleMem 作为**云端记忆服务**，通过模型上下文协议（MCP）提供，支持与 Claude Desktop、Cursor 等 AI 助手无缝集成。
 
@@ -465,6 +488,19 @@ SimpleMem 作为**云端记忆服务**，通过模型上下文协议（MCP）提
 ```
 
 > 📖 详细的安装说明和自部署指南，请参阅 [MCP 文档](../../MCP/README.md)
+
+---
+
+---
+
+## 🗺️ 路线图
+
+- 🔲 Omni cross-session memory
+- 🔲 Omni MCP server
+- 🔲 Omni Docker support
+- 🔲 Omni PyPI package
+- 🔲 Streaming ingestion
+- 🔲 Multi-agent memory sharing
 
 ---
 

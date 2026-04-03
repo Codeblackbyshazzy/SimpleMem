@@ -4,7 +4,7 @@
 
 <div align="center">
 
-## ذاكرة مدى الحياة فعّالة لوكلاء نماذج اللغة الكبيرة
+## ذاكرة مدى الحياة فعّالة لوكلاء نماذج اللغة الكبيرة — Text & Multimodal
 
 <small>تخزين وضغط واسترجاع الذكريات طويلة المدى من خلال الضغط الدلالي بدون فقدان. متوافق مع Claude وCursor وLM Studio والمزيد.</small>
 
@@ -195,7 +195,30 @@ print(answer)
 
 ---
 
-## 🔌 خادم MCP
+---
+
+<div align="center">
+
+# 🧠 Omni-SimpleMem: Multimodal Memory
+
+**NEW** — SimpleMem now handles text, image, audio & video.
+
+</div>
+
+<table>
+<tr>
+<td align="center" width="140">📈 <b>+411%</b><br><sub>LoCoMo F1</sub></td>
+<td align="center" width="140">📈 <b>+214%</b><br><sub>Mem-Gallery F1</sub></td>
+<td align="center" width="140">⚡ <b>5.81 q/s</b><br><sub>3.5x faster</sub></td>
+<td align="center" width="140">🧠 <b>4 modalities</b><br><sub>Text · Image · Audio · Video</sub></td>
+</tr>
+</table>
+
+> 📖 Full documentation: [**Omni-SimpleMem →**](../../OmniSimpleMem/)
+
+---
+
+## 🔌 خادم MCP *(text memory)*
 
 **🌐 الخدمة السحابية**: [mcp.simplemem.cloud](https://mcp.simplemem.cloud)
 
@@ -213,6 +236,19 @@ print(answer)
 ```
 
 > 📖 [توثيق MCP](../../MCP/README.md)
+
+---
+
+---
+
+## 🗺️ خارطة الطريق
+
+- 🔲 Omni cross-session memory
+- 🔲 Omni MCP server
+- 🔲 Omni Docker support
+- 🔲 Omni PyPI package
+- 🔲 Streaming ingestion
+- 🔲 Multi-agent memory sharing
 
 ---
 

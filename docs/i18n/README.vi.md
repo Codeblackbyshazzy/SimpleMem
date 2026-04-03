@@ -4,7 +4,7 @@
 
 <div align="center">
 
-## Bộ Nhớ Trọn Đời Hiệu Quả cho Tác Tử LLM
+## Bộ Nhớ Trọn Đời Hiệu Quả cho Tác Tử LLM — Text & Multimodal
 
 <small>Lưu trữ, nén và truy xuất bộ nhớ dài hạn với nén ngữ nghĩa không mất mát. Tương thích với Claude, Cursor, LM Studio và nhiều nền tảng khác.</small>
 
@@ -195,7 +195,30 @@ print(answer)
 
 ---
 
-## 🔌 Máy Chủ MCP
+---
+
+<div align="center">
+
+# 🧠 Omni-SimpleMem: Multimodal Memory
+
+**NEW** — SimpleMem now handles text, image, audio & video.
+
+</div>
+
+<table>
+<tr>
+<td align="center" width="140">📈 <b>+411%</b><br><sub>LoCoMo F1</sub></td>
+<td align="center" width="140">📈 <b>+214%</b><br><sub>Mem-Gallery F1</sub></td>
+<td align="center" width="140">⚡ <b>5.81 q/s</b><br><sub>3.5x faster</sub></td>
+<td align="center" width="140">🧠 <b>4 modalities</b><br><sub>Text · Image · Audio · Video</sub></td>
+</tr>
+</table>
+
+> 📖 Full documentation: [**Omni-SimpleMem →**](../../OmniSimpleMem/)
+
+---
+
+## 🔌 Máy Chủ MCP *(text memory)*
 
 **🌐 Dịch Vụ Đám Mây**: [mcp.simplemem.cloud](https://mcp.simplemem.cloud)
 
@@ -213,6 +236,19 @@ print(answer)
 ```
 
 > 📖 [Tài Liệu MCP](../../MCP/README.md)
+
+---
+
+---
+
+## 🗺️ Lộ Trình
+
+- 🔲 Omni cross-session memory
+- 🔲 Omni MCP server
+- 🔲 Omni Docker support
+- 🔲 Omni PyPI package
+- 🔲 Streaming ingestion
+- 🔲 Multi-agent memory sharing
 
 ---
 
