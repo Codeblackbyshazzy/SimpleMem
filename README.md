@@ -108,7 +108,7 @@
 
 <br/>
 
-[🚀 Quick Start](#-quick-start) • [🌟 Overview](#-overview) • [📈 Results](#-results) • [🧠 Omni-SimpleMem](#-omni-simplemem-multimodal-memory) • [📦 Installation](#-installation) • [🔄 Cross-Session Memory](#-cross-session-memory-text-memory) • [🔌 MCP Server](#-mcp-server-text-memory) • [📝 Citation](#-citation)
+[🚀 Quick Start](#-quick-start) • [🌟 Overview](#-overview) • [📈 Results](#-results) • [🧠 Omni-SimpleMem](#-omni-simplemem-multimodal-memory) • [🧬 EvolveMem](#-evolvemem-self-evolving-memory) • [📦 Installation](#-installation) • [🔌 MCP Server](#-mcp-server-text-memory) • [📝 Citation](#-citation)
 
 </div>
 
@@ -118,13 +118,11 @@
 
 ## 🔥 News
 
-- **[04/02/2026]** 🧠 **Omni-SimpleMem — Multimodal Memory is Here!** SimpleMem now supports **text, image, audio & video** memory. Achieving **new SOTA on LoCoMo (F1=0.613, +47%)** and **Mem-Gallery (F1=0.810, +51%)** over previous best, Omni-SimpleMem brings state-of-the-art multimodal lifelong memory to your agents. [View Omni-SimpleMem →](OmniSimpleMem/)
-- **[02/09/2026]** 🚀 **Cross-Session Memory is Here — Outperforming Claude-Mem by 64%!** SimpleMem now supports **persistent memory across conversations**. On the LoCoMo benchmark, SimpleMem achieves a **64% performance boost** over Claude-Mem. Your agents can now recall context, decisions, and learnings from previous sessions automatically. [View Cross-Session Documentation →](cross/README.md)
-- **[01/20/2026]** **SimpleMem is now available on PyPI!** 📦 Install directly via `pip install simplemem`. [View Package Usage Guide →](docs/PACKAGE_USAGE.md)
-- **[01/19/2026]** **Added Local Memory Storage for SimpleMem Skill!** 💾 SimpleMem Skill now supports local memory storage within Claude Skills.
-- **[01/18/2026]** **SimpleMem now supports Claude Skills!** 🚀 Use SimpleMem in claude.ai for long-term memory across conversations. Register at [mcp.simplemem.cloud](https://mcp.simplemem.cloud), configure your token, and import the skill!
-- **[01/14/2026]** **SimpleMem MCP Server is now LIVE and Open Source!** 🎉 Cloud-hosted memory service at [mcp.simplemem.cloud](https://mcp.simplemem.cloud). Integrates with LM Studio, Cherry Studio, Cursor, Claude Desktop via **Streamable HTTP** MCP protocol. [View MCP Documentation →](MCP/README.md)
-- **[01/08/2026]** 🔥 Join our [Discord](https://discord.gg/KA2zC32M) and [WeChat Group](fig/wechat_logo3.JPG) to collaborate and exchange ideas!
+- **[05/14/2026]** 🧬 **EvolveMem (v3.0) — Self-Evolving Memory via AutoResearch!** The retrieval infrastructure itself now self-evolves through LLM-driven closed-loop diagnosis. On LoCoMo, EvolveMem outperforms the strongest baseline by **+25.7% relative**; on MemBench, by **+18.9% relative**. The system discovers entirely new retrieval dimensions not present in the original design. [View EvolveMem →](EvolveMem/)
+- **[04/02/2026]** 🧠 **Omni-SimpleMem (v2.0) — Multimodal Memory is Here!** SimpleMem now supports **text, image, audio & video** memory. Achieving **new SOTA on LoCoMo (F1=0.613, +47%)** and **Mem-Gallery (F1=0.810, +51%)** over previous best. [View Omni-SimpleMem →](OmniSimpleMem/)
+- **[02/09/2026]** 🚀 **Cross-Session Memory — Outperforming Claude-Mem by 64%!** [View Cross-Session Documentation →](cross/README.md)
+- **[01/20/2026]** 📦 **SimpleMem is now available on PyPI!** Install via `pip install simplemem`. [View Package Usage Guide →](docs/PACKAGE_USAGE.md)
+- **[01/14/2026]** 🎉 **SimpleMem MCP Server is LIVE!** Cloud-hosted at [mcp.simplemem.cloud](https://mcp.simplemem.cloud). [View MCP Documentation →](MCP/README.md)
 - **[01/05/2026]** SimpleMem paper was released on [arXiv](https://arxiv.org/abs/2601.02553)!
 
 ---
@@ -136,12 +134,10 @@
 - [📈 Results](#-results)
 - [📝 SimpleMem: Text Memory](#-simplemem-text-memory)
 - [🧠 Omni-SimpleMem: Multimodal Memory](#-omni-simplemem-multimodal-memory)
+- [🧬 EvolveMem: Self-Evolving Memory](#-evolvemem-self-evolving-memory)
 - [📦 Installation](#-installation)
 - [🐳 Docker](#-run-with-docker)
-- [🔌 Router Utilities](#-router-utilities)
-- [🔄 Cross-Session Memory](#-cross-session-memory-text-memory)
 - [🔌 MCP Server](#-mcp-server-text-memory)
-- [🗺️ Roadmap](#️-roadmap)
 - [📊 Evaluation](#-evaluation)
 - [📝 Citation](#-citation)
 
@@ -293,14 +289,6 @@ Infers search intent to dynamically determine retrieval scope and construct prec
 
 > For multimodal memory, see [Omni-SimpleMem](#-omni-simplemem-multimodal-memory) below.
 
-<div align="center">
-<img src="fig/Fig_framework.png" alt="SimpleMem Framework" width="900"/>
-
-*The SimpleMem Architecture: (1) Semantic Structured Compression filters low-utility dialogue and converts informative windows into compact, context-independent memory units. (2) Online Semantic Synthesis consolidates related fragments during writing, maintaining a compact and coherent memory topology. (3) Intent-Aware Retrieval Planning infers search intent to adapt retrieval scope and query forms, enabling parallel multi-view retrieval and token-efficient context construction.*
-</div>
-
----
-
 ### 🏆 Performance Comparison
 
 <div align="center">
@@ -365,6 +353,17 @@ Infers search intent to dynamically determine retrieval scope and construct prec
 | **Average F1** | 25.23% | 23.77% | Competitive with 99× smaller model |
 
 </details>
+
+### 🧬 EvolveMem Results
+
+<table>
+<tr>
+<td align="center" width="200">🏆 <b>0.543 F1</b><br><sub>LoCoMo GPT-4o (+25.7% over SimpleMem)</sub></td>
+<td align="center" width="200">🏆 <b>0.572 F1</b><br><sub>LoCoMo GPT-5.1 (+36.8% over SimpleMem)</sub></td>
+<td align="center" width="200">🏆 <b>71.4% Acc</b><br><sub>MemBench (+18.9% over best baseline)</sub></td>
+<td align="center" width="150">🧬 <b>Self-evolving</b><br><sub>7 autonomous rounds</sub></td>
+</tr>
+</table>
 
 ### 🧠 Omni-SimpleMem Results
 
@@ -468,6 +467,25 @@ Built on three principles: **Selective Ingestion** (entropy-driven filtering for
 
 ---
 
+## 🧬 EvolveMem: Self-Evolving Memory
+
+**EvolveMem** (v3.0) makes the retrieval infrastructure itself a first-class optimization target. While SimpleMem and Omni-SimpleMem keep retrieval configurations frozen, EvolveMem autonomously evolves its retrieval policy through an LLM-driven closed-loop:
+
+**Evaluate** → **Diagnose** failures → **Propose** config changes → **Guard** against regression → **Repeat**
+
+This self-evolution constitutes an AutoResearch process: the system conducts iterative research cycles on its own architecture, discovering new retrieval dimensions (query decomposition, entity-swap, answer verification) that were not in the original design.
+
+| Benchmark | Backbone | EvolveMem | Best Baseline | Relative Gain |
+|-----------|----------|:---------:|:-------------:|:-------------:|
+| LoCoMo (F1) | GPT-4o | **0.543** | 0.432 (SimpleMem) | +25.7% |
+| LoCoMo (F1) | GPT-5.1 | **0.572** | 0.418 (SimpleMem) | +36.8% |
+| MemBench (Acc) | GPT-4o | **67.9%** | 57.1% | +18.9% |
+| MemBench (Acc) | GPT-5.1 | **71.4%** | 64.3% | +11.0% |
+
+> 📖 Full documentation, architecture, and usage: [**EvolveMem →**](EvolveMem/)
+
+---
+
 ## 📦 Installation
 
 ### 📝 Notes for First-Time Users
@@ -565,146 +583,6 @@ docker compose down                 # Stop and remove containers
 
 ---
 
-## 🔌 Router Utilities
-
-The router uses a **registry-based factory** pattern — backends are lazily loaded only when requested, and dependencies are checked before instantiation.
-
-```python
-import simplemem_router as simplemem
-
-# List all registered modes
-simplemem.list_modes()
-# {'text': 'Single-modal text memory with semantic lossless compression',
-#  'omni': 'Multimodal memory — text, image, audio, video (Omni-SimpleMem)'}
-
-# Check if a mode's dependencies are satisfied
-simplemem.is_available("omni")  # True / False
-
-# Check which mode was auto-selected
-mem = simplemem.create()
-print(mem.mode)  # "auto" (pending), "text", or "omni"
-
-# Register a custom backend
-simplemem.register(
-    mode="my_backend",
-    module_path="my_package.memory",
-    class_name="MyMemorySystem",
-    description="Custom memory backend",
-    required_deps=["my_package"],
-)
-mem = simplemem.create(mode="my_backend")
-```
-
----
-
-## ❓ Common Setup Issues & Troubleshooting
-
-If you encounter issues while setting up or running SimpleMem for the first time, check the following common cases:
-
-### 1️⃣ API Key Not Detected
-- Ensure your API key is correctly set in `config.py`
-- For OpenAI-compatible providers (Qwen, Azure, etc.), verify that `OPENAI_BASE_URL` is configured correctly
-- Restart your Python environment after updating the key
-
-### 2️⃣ Python Version Mismatch
-- SimpleMem requires **Python 3.10**
-- Check your version using:
-  ```bash
-  python --version
-  ```
-
----
-
-## 🔄 Cross-Session Memory *(text memory)*
-
-**SimpleMem-Cross** extends SimpleMem with persistent cross-conversation memory capabilities. Agents can recall context, decisions, and observations from previous sessions — enabling continuity across conversations without manual context re-injection.
-
-### Key Features
-
-| Feature | Description |
-|---------|-------------|
-| **Session Lifecycle** | Full session management with start/record/stop/end lifecycle |
-| **Automatic Context Injection** | Token-budgeted context from previous sessions injected at session start |
-| **Event Collection** | Record messages, tool uses, file changes with automatic redaction |
-| **Observation Extraction** | Heuristic extraction of decisions, discoveries, and learnings |
-| **Provenance Tracking** | Every memory entry links back to source evidence |
-| **Consolidation** | Decay, merge, and prune old memories to maintain quality |
-
-### Quick Example
-
-```python
-from cross.orchestrator import create_orchestrator
-
-async def main():
-    orch = create_orchestrator(project="my-project")
-
-    # Start session — previous context is injected automatically
-    result = await orch.start_session(
-        content_session_id="session-001",
-        user_prompt="Continue building the REST API",
-    )
-    print(result["context"])  # Relevant context from previous sessions
-
-    # Record events during the session
-    await orch.record_message(result["memory_session_id"], "User asked about JWT")
-    await orch.record_tool_use(
-        result["memory_session_id"],
-        tool_name="read_file",
-        tool_input="auth/jwt.py",
-        tool_output="class JWTHandler: ...",
-    )
-
-    # Finalize — extracts observations, generates summary, stores memories
-    report = await orch.stop_session(result["memory_session_id"])
-    print(f"Stored {report.entries_stored} memory entries")
-
-    await orch.end_session(result["memory_session_id"])
-    orch.close()
-```
-
-### Architecture
-
-```
-Agent Frameworks (Claude Code / Cursor / custom)
-                    |
-     +--------------+--------------+
-     |                             |
-Hook/Lifecycle Adapter      HTTP/MCP API (FastAPI)
-     |                             |
-     +--------------+--------------+
-                    |
-           CrossMemOrchestrator
-                    |
-  +-----------------+------------------+
-  |                 |                  |
-Session Manager  Context Injector  Consolidation
-(SQLite)         (budgeted bundle) (decay/merge/prune)
-  |                 |                  |
-  +---------+-------+                  |
-            |                          |
-   Cross-Session Vector Store (LanceDB) <--+
-```
-
-### Module Reference
-
-| Module | Description |
-|--------|-------------|
-| `cross/types.py` | Pydantic models, enums, records |
-| `cross/storage_sqlite.py` | SQLite backend for sessions, events, observations |
-| `cross/storage_lancedb.py` | LanceDB vector store with provenance |
-| `cross/hooks.py` | Lifecycle hooks (SessionStart/ToolUse/End) |
-| `cross/collectors.py` | Event collection with 3-tier redaction |
-| `cross/session_manager.py` | Full session lifecycle orchestration |
-| `cross/context_injector.py` | Token-budgeted context builder |
-| `cross/orchestrator.py` | Top-level facade and factory |
-| `cross/api_http.py` | FastAPI REST endpoints |
-| `cross/api_mcp.py` | MCP tool definitions |
-| `cross/consolidation.py` | Memory maintenance worker |
-
-> 📖 For detailed API documentation, see [Cross-Session README](cross/README.md)
-
----
-
 ## 🔌 MCP Server *(text memory)*
 
 SimpleMem is available as a **cloud-hosted memory service** via the Model Context Protocol (MCP), enabling seamless integration with AI assistants like Claude Desktop, Cursor, and other MCP-compatible clients.
@@ -739,26 +617,6 @@ SimpleMem is available as a **cloud-hosted memory service** via the Model Contex
 
 ---
 
-## 🗺️ Roadmap
-
-**Omni-SimpleMem infrastructure** — bringing multimodal memory to all shared components:
-
-- [ ] Omni cross-session memory (text + image + audio + video persistence)
-- [ ] Omni MCP server (multimodal memory via MCP protocol)
-- [ ] Omni Docker support
-- [ ] Omni PyPI package (`pip install omni-simplemem`)
-- [ ] Omni Claude Skills integration
-
-**Core improvements:**
-
-- [ ] Streaming ingestion for real-time memory updates
-- [ ] Memory sharing across multiple agents
-- [ ] Benchmark expansion (more multimodal benchmarks)
-
-Contributions welcome! Open an [issue](https://github.com/aiming-lab/SimpleMem/issues) to discuss.
-
----
-
 ## 📊 Evaluation
 
 ### 🧪 Run Benchmark Tests
@@ -790,12 +648,22 @@ Use the exact configurations in `config.py`:
 If you use SimpleMem in your research, please cite:
 
 ```bibtex
-@article{simplemem2025,
+@article{simplemem2026,
   title={SimpleMem: Efficient Lifelong Memory for LLM Agents},
   author={Liu, Jiaqi and Su, Yaofeng and Xia, Peng and Zhou, Yiyang and Han, Siwei and  Zheng, Zeyu and Xie, Cihang and Ding, Mingyu and Yao, Huaxiu},
   journal={arXiv preprint arXiv:2601.02553},
-  year={2025},
-  url={https://github.com/aiming-lab/SimpleMem}
+  year={2026},
+  url={https://arxiv.org/abs/2601.02553}
+}
+```
+
+```bibtex
+@article{evolvemem2026,
+  title={EvolveMem: Self-Evolving Memory Architecture via AutoResearch for LLM Agents},
+  author={Liu, Jiaqi and Ye, Xinyu and Xia, Peng and Zheng, Zeyu and Xie, Cihang and Ding, Mingyu and Yao, Huaxiu},
+  journal={arXiv preprint arXiv:2605.13941},
+  year={2026},
+  url={https://arxiv.org/abs/2605.13941}
 }
 ```
 
