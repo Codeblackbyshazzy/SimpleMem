@@ -46,7 +46,7 @@ def optimize(mem, dev_questions, max_rounds=7, **kwargs):
         config = simplemem.load_config("my_config.json")
         mem = SimpleMem(config=config)
     """
-    from simplemem.optimizer.optimize import run_optimization
+    from simplemem.evolver.optimize import run_optimization
     return run_optimization(mem, dev_questions, max_rounds, **kwargs)
 
 
