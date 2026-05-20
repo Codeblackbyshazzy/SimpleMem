@@ -57,7 +57,6 @@ resulting `Config` for inference:
 
 ```python
 import simplemem
-from simplemem import SimpleMem, load_config
 
 dev_questions = [
     ("When is the meeting?", "2pm tomorrow"),
@@ -65,10 +64,6 @@ dev_questions = [
 ]
 config = simplemem.optimize(mem, dev_questions, max_rounds=3)
 config.save("my_config.json")
-
-# Later, deploy with optimized config
-config = load_config("my_config.json")
-mem = SimpleMem(config=config)
 ```
 
 This is a thin convenience wrapper around EvolveMem's diagnosis loop. It runs
@@ -97,33 +92,6 @@ pip install -e ".[all]"           # everything, including dev tools
 cp config.py.example config.py
 # Edit config.py with your API key and (optional) base URL.
 ```
-
----
-
-## 📋 TODO (refactor handoff)
-
-Outstanding items from the `simplemem/` package merge. Drop these as fast as work lands; they're not visible to users of the text path but matter for finishing the unified package.
-
-### 🟡 Non-blocking — legacy top-level dirs left in place
-
-The pre-refactor sources (`models/`, `utils/`, `database/`, `core/`, `OmniSimpleMem/`) still sit at the repo root and are imported by `main.py`, `test_locomo10.py`, `tests/`, `cross/`, `SKILL/`, `MCP/`, and `simplemem/integrations/*`. They were intentionally **not** deleted in this pass to avoid breaking those entry points. To finish cleaning up:
-
-- [ ] Rewrite each of the above to import from `simplemem.core.*` / `simplemem.multimodal` instead of the top-level paths.
-- [ ] Delete the legacy top-level dirs once nothing depends on them.
-
-Note: `EvolveMem/` is **intentionally kept** at the repo root as the self-contained, full EvolveMem standalone version with benchmark adapters and per-category overrides. See `EvolveMem/README.md`. It is not on the cleanup list.
-
-### 🟢 Done in this refactor pass (for context)
-
-- `simplemem/` unified package: router (`SimpleMem` / `create` / `list_modes`), `optimize`, `Config`, `load_config` — all importable.
-- Text path validated end-to-end against `examples/quickstart.py` (Qwen3-Embedding-0.6B + LanceDB + Tantivy FTS).
-- `simplemem/core/settings.py` reads user's `config.py` first, then env vars, then built-in defaults.
-- `simplemem/multimodal/` imports rewritten from `omni_memory.*` to `simplemem.multimodal.*` (38 files).
-- `simplemem/evolver/optimize.py` import path corrected (`simplemem.optimizer` → `simplemem.evolver`) and the stale `from evolvemem.multi_retriever import …` in `evolution.py` was retargeted to `simplemem.evolver.multi_retriever`.
-- `setup.py` with `install_requires` grounded in `MCP/requirements.txt`, `OmniSimpleMem/setup.py`, and commit `9686aa5`'s canonical `pyproject.toml`. `pip install --dry-run -e .` and `-e ".[server]"` both resolve cleanly.
-- `simplemem/config.py`, `simplemem/evolver/config.py`, `simplemem/multimodal/core/config.py` added in `d59fa45` (root-cause was an over-broad `.gitignore` rule; fixed there too). All `simplemem.*` subpackages now import cleanly.
-- `EvolveMem/evolvemem/config.py` added (defaults matching MetaMem `99cd447`). The standalone `python EvolveMem/run_evolution.py` entry point now imports and bootstraps without errors.
-- `simplemem/evolver/optimize.py` rewritten as a real degraded-mode wrapper over `EvolutionEngine.evolve()`. Smoke-tested end-to-end against a 3-dialogue / 3-question dev set on Azure gpt-4o-mini + MiniLM embedder.
 
 ---
 
