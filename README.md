@@ -133,7 +133,6 @@
 - [🚀 Quick Start](#-quick-start)
 - [🌟 Overview](#-overview)
 - [📈 Results](#-results)
-- [📝 SimpleMem: Text Memory](#-simplemem-text-memory)
 - [📦 Installation](#-installation)
 - [🐳 Docker](#-run-with-docker)
 - [🔌 MCP Server](#-mcp-server-text-memory)
@@ -292,7 +291,7 @@ Most memory systems force a bad trade-off. They either passively accumulate raw 
 | **2. Online Semantic Synthesis** | Merges related context within a session into unified abstract representations, removing redundancy as memory is built rather than at query time. |
 | **3. Intent-Aware Retrieval Planning** | Infers the search intent behind a query to decide *what* to retrieve and assemble a precise, compact context. |
 
-On the LoCoMo benchmark this delivers a 26.4% average F1 gain over prior systems while cutting inference-time token consumption by roughly 30x.
+On the LoCoMo benchmark this delivers a 26.4% average F1 gain over prior systems while cutting inference-time token consumption by roughly 30x. Mechanism details (hybrid index layers, compression examples, retrieval planning): [**SimpleMem text memory →**](docs/text-memory.md).
 
 ### 🧠 Omni-SimpleMem: multimodal memory (text, image, audio, video)
 
@@ -390,81 +389,6 @@ EvolveMem closes a blind spot shared by almost every memory system: the stored c
 <td align="center" width="140">🧠 <b>4 modalities</b><br><sub>Text · Image · Audio · Video</sub></td>
 </tr>
 </table>
-
----
-
-## 📝 SimpleMem: Text Memory
-
-### 1️⃣ Semantic Structured Compression
-
-SimpleMem applies an **implicit semantic density gating** mechanism integrated into the LLM generation process to filter redundant interaction content. The system reformulates raw dialogue streams into **compact memory units** — self-contained facts with resolved coreferences and absolute timestamps. Each unit is indexed through three complementary representations for flexible retrieval:
-
-<div align="center">
-
-| 🔍 Layer | 📊 Type | 🎯 Purpose | 🛠️ Implementation |
-|---------|---------|------------|-------------------|
-| **Semantic** | Dense | Conceptual similarity | Vector embeddings (1024-d) |
-| **Lexical** | Sparse | Exact term matching | BM25-style keyword index |
-| **Symbolic** | Metadata | Structured filtering | Timestamps, entities, persons |
-
-</div>
-
-**✨ Example Transformation:**
-```diff
-- Input:  "He'll meet Bob tomorrow at 2pm"  [❌ relative, ambiguous]
-+ Output: "Alice will meet Bob at Starbucks on 2025-11-16T14:00:00"  [✅ absolute, atomic]
-```
-
----
-
-### 2️⃣ Online Semantic Synthesis
-
-Unlike traditional systems that rely on asynchronous background maintenance, SimpleMem performs synthesis **on-the-fly during the write phase**. Related memory units are synthesized into higher-level abstract representations within the current session scope, allowing repetitive or structurally similar experiences to be **denoised and compressed immediately**.
-
-**✨ Example Synthesis:**
-```diff
-- Fragment 1: "User wants coffee"
-- Fragment 2: "User prefers oat milk"
-- Fragment 3: "User likes it hot"
-+ Consolidated: "User prefers hot coffee with oat milk"
-```
-
-This proactive synthesis ensures the memory topology remains compact and free of redundant fragmentation.
-
----
-
-### 3️⃣ Intent-Aware Retrieval Planning
-
-Instead of fixed-depth retrieval, SimpleMem leverages the reasoning capabilities of the LLM to generate a **comprehensive retrieval plan**. Given a query, the planning module infers **latent search intent** to dynamically determine retrieval scope and depth:
-
-$$\{ q_{\text{sem}}, q_{\text{lex}}, q_{\text{sym}}, d \} \sim \mathcal{P}(q, H)$$
-
-The system then executes **parallel multi-view retrieval** across semantic, lexical, and symbolic indexes, and merges results through ID-based deduplication:
-
-<table>
-<tr>
-<td width="50%">
-
-**🔹 Simple Queries**
-- Direct fact lookup via single memory unit
-- Minimal retrieval depth
-- Fast response time
-
-</td>
-<td width="50%">
-
-**🔸 Complex Queries**
-- Aggregation across multiple events
-- Expanded retrieval depth
-- Comprehensive coverage
-
-</td>
-</tr>
-</table>
-
-**📈 Result**: 43.24% F1 score with **30× fewer tokens** than full-context methods.
-
-> 🧠 **Multimodal** (Omni-SimpleMem) and 🧬 **self-evolving retrieval** (EvolveMem) are summarized in the [Overview](#-overview); full architecture and benchmarks live in [`OmniSimpleMem/`](OmniSimpleMem/) and [`EvolveMem/`](EvolveMem/).
 
 ---
 
