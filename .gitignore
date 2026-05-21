@@ -67,6 +67,8 @@ env/
 *.sqlite
 *.sqlite3
 lancedb_data/
+omni_memory_data/
+evolution_results/
 
 # Log files
 *.log
