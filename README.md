@@ -308,7 +308,11 @@ EvolveMem closes a blind spot shared by almost every memory system: the stored c
 
 `from simplemem import SimpleMem` gives you the text core with automatic routing to the multimodal backend, and `simplemem.optimize(...)` taps EvolveMem to tune retrieval for your own data. One package, one mental model: compress losslessly, retrieve by intent, and let the system keep improving itself.
 
-### 🏆 Performance Comparison
+---
+
+## 📈 Results
+
+### 🏆 SimpleMem: Performance vs Efficiency
 
 <div align="center">
 
@@ -336,10 +340,6 @@ EvolveMem closes a blind spot shared by almost every memory system: the stored c
 | **SimpleMem** ⭐ | **92.6s** | **388.3s** | **480.9s** | **43.24%** |
 
 </div>
-
----
-
-## 📈 Results
 
 ### 📊 Benchmark Results (LoCoMo)
 
