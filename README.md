@@ -234,27 +234,6 @@ mem.close()
 
 ---
 
-### 🚄 Advanced: Parallel Processing
-
-For large-scale dialogue processing, enable parallel mode:
-
-```python
-from simplemem import create
-
-mem = create(
-    mode="text",
-    clear_db=True,
-    enable_parallel_processing=True,  # ⚡ Parallel memory building
-    max_parallel_workers=8,
-    enable_parallel_retrieval=True,   # 🔍 Parallel query execution
-    max_retrieval_workers=4
-)
-```
-
-> **💡 Pro Tip**: Parallel processing significantly reduces latency for batch operations!
-
----
-
 ### 🧬 Advanced: Optimize Retrieval Config
 
 Tune retrieval hyperparameters offline on your own dev set, then deploy the resulting `Config` for inference. This is a thin wrapper around EvolveMem's self-evolution loop:
@@ -277,6 +256,27 @@ mem = SimpleMem(config=config)
 ```
 
 > EvolveMem runs an LLM-driven Evaluate → Diagnose → Propose → Guard cycle over your dev questions, adjusting global retrieval flags (top_k, fusion mode, answer verification, reflection rounds, ...). For the full standalone version with benchmark adapters and per-category overrides, see [`EvolveMem/`](EvolveMem/).
+
+---
+
+### 🚄 Advanced: Parallel Processing
+
+For large-scale dialogue processing, enable parallel mode:
+
+```python
+from simplemem import create
+
+mem = create(
+    mode="text",
+    clear_db=True,
+    enable_parallel_processing=True,  # ⚡ Parallel memory building
+    max_parallel_workers=8,
+    enable_parallel_retrieval=True,   # 🔍 Parallel query execution
+    max_retrieval_workers=4
+)
+```
+
+> **💡 Pro Tip**: Parallel processing significantly reduces latency for batch operations!
 
 ---
 
