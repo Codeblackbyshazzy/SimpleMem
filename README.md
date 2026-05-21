@@ -282,38 +282,31 @@ mem = create(
 
 ## 🌟 Overview
 
-**SimpleMem** is a family of efficient memory frameworks — **SimpleMem** for text and **Omni-SimpleMem** for multimodal (text, image, audio, video) — based on **semantic lossless compression** that addresses the fundamental challenge of **efficient long-term memory for LLM agents**. Unlike existing systems that either passively accumulate redundant context or rely on expensive iterative reasoning loops, SimpleMem maximizes **information density** and **token utilization** through a three-stage pipeline:
+**SimpleMem** is a unified memory stack for LLM agents, built on one principle: store *semantically lossless* memory at high information density, so an agent recalls more while spending far fewer tokens. The package brings together three works that share this principle but attack different parts of the problem.
 
-<table>
-<tr>
-<td width="33%" align="center">
+### 📝 SimpleMem: the efficiency core (text)
 
-### 🔍 Stage 1
-**Semantic Structured Compression**
+Most memory systems force a bad trade-off. They either passively accumulate raw interaction history (redundant, token-hungry) or run expensive reasoning loops to filter noise (slow, costly). SimpleMem instead compresses interactions through a three-stage pipeline:
 
-Distills unstructured interactions into compact, multi-view indexed memory units
+| Stage | What it does |
+|:--|:--|
+| **1. Semantic Structured Compression** | Distills unstructured interactions into compact memory units (self-contained facts with resolved coreferences and absolute timestamps), each indexed through multiple complementary views for flexible retrieval. |
+| **2. Online Semantic Synthesis** | Merges related context within a session into unified abstract representations, removing redundancy as memory is built rather than at query time. |
+| **3. Intent-Aware Retrieval Planning** | Infers the search intent behind a query to decide *what* to retrieve and assemble a precise, compact context. |
 
-</td>
-<td width="33%" align="center">
+On the LoCoMo benchmark this delivers a 26.4% average F1 gain over prior systems while cutting inference-time token consumption by roughly 30x.
 
-### 🗂️ Stage 2
-**Online Semantic Synthesis**
+### 🧠 Omni-SimpleMem: multimodal memory (text, image, audio, video)
 
-Intra-session process that instantly integrates related context into unified abstract representations to eliminate redundancy
+Omni-SimpleMem extends the compression-first philosophy to four modalities. Rather than being hand-designed, its architecture was *discovered* by an autonomous research pipeline that ran around 50 experiments across two benchmarks, diagnosing failure modes, proposing architectural changes, and even repairing data-pipeline bugs with no human in the inner loop. Tellingly, the bug fixes and architectural changes each contributed more than all hyperparameter tuning combined, taking the system from a naive baseline to state-of-the-art on both LoCoMo and Mem-Gallery.
 
-</td>
-<td width="33%" align="center">
+### 🧬 EvolveMem: self-evolving retrieval
 
-### 🎯 Stage 3
-**Intent-Aware Retrieval Planning**
+EvolveMem closes a blind spot shared by almost every memory system: the stored content evolves, but the *retrieval* machinery (scoring functions, fusion strategies, answer-generation policies) stays frozen after deployment. EvolveMem runs a closed-loop AutoResearch process in which an LLM diagnoses per-question failures and proposes configuration changes, guarded by automatic rollback on regression and exploration incentives during stagnation. It improves LoCoMo by 25.7% relative over the strongest baseline, and evolved configurations transfer positively across benchmarks, which suggests it discovers general retrieval principles rather than benchmark-specific tricks.
 
-Infers search intent to dynamically determine retrieval scope and construct precise context efficiently
+### How they fit together
 
-</td>
-</tr>
-</table>
-
-> For multimodal memory, see [Omni-SimpleMem](#-omni-simplemem-multimodal-memory) below.
+`from simplemem import SimpleMem` gives you the text core with automatic routing to the multimodal backend, and `simplemem.optimize(...)` taps EvolveMem to tune retrieval for your own data. One package, one mental model: compress losslessly, retrieve by intent, and let the system keep improving itself.
 
 ### 🏆 Performance Comparison
 
