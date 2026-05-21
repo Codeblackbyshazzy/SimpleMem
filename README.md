@@ -108,7 +108,7 @@
 
 <br/>
 
-[🚀 Quick Start](#-quick-start) • [🌟 Overview](#-overview) • [📈 Results](#-results) • [🧠 Omni-SimpleMem](#-omni-simplemem-multimodal-memory) • [🧬 EvolveMem](#-evolvemem-self-evolving-memory) • [📦 Installation](#-installation) • [🔌 MCP Server](#-mcp-server-text-memory) • [📝 Citation](#-citation)
+[🚀 Quick Start](#-quick-start) • [🌟 Overview](#-overview) • [📈 Results](#-results) • [📦 Installation](#-installation) • [🔌 MCP Server](#-mcp-server-text-memory) • [📝 Citation](#-citation)
 
 </div>
 
@@ -134,8 +134,6 @@
 - [🌟 Overview](#-overview)
 - [📈 Results](#-results)
 - [📝 SimpleMem: Text Memory](#-simplemem-text-memory)
-- [🧠 Omni-SimpleMem: Multimodal Memory](#-omni-simplemem-multimodal-memory)
-- [🧬 EvolveMem: Self-Evolving Memory](#-evolvemem-self-evolving-memory)
 - [📦 Installation](#-installation)
 - [🐳 Docker](#-run-with-docker)
 - [🔌 MCP Server](#-mcp-server-text-memory)
@@ -298,11 +296,11 @@ On the LoCoMo benchmark this delivers a 26.4% average F1 gain over prior systems
 
 ### 🧠 Omni-SimpleMem: multimodal memory (text, image, audio, video)
 
-Omni-SimpleMem extends the compression-first philosophy to four modalities. Rather than being hand-designed, its architecture was *discovered* by an autonomous research pipeline that ran around 50 experiments across two benchmarks, diagnosing failure modes, proposing architectural changes, and even repairing data-pipeline bugs with no human in the inner loop. Tellingly, the bug fixes and architectural changes each contributed more than all hyperparameter tuning combined, taking the system from a naive baseline to state-of-the-art on both LoCoMo and Mem-Gallery.
+Omni-SimpleMem extends the compression-first philosophy to four modalities, built on three principles: **Selective Ingestion** (entropy-driven filtering per modality), **Progressive Retrieval** (hybrid FAISS + BM25 with pyramid token-budget expansion), and **Knowledge Graph Augmentation** (multi-hop cross-modal reasoning). Rather than being hand-designed, its architecture was *discovered* by an autonomous research pipeline that ran around 50 experiments across two benchmarks, diagnosing failure modes, proposing architectural changes, and even repairing data-pipeline bugs with no human in the inner loop. Tellingly, the bug fixes and architectural changes each contributed more than all hyperparameter tuning combined, taking the system from a naive baseline to state-of-the-art on both LoCoMo and Mem-Gallery. Full docs: [**Omni-SimpleMem →**](OmniSimpleMem/).
 
 ### 🧬 EvolveMem: self-evolving retrieval
 
-EvolveMem closes a blind spot shared by almost every memory system: the stored content evolves, but the *retrieval* machinery (scoring functions, fusion strategies, answer-generation policies) stays frozen after deployment. EvolveMem runs a closed-loop AutoResearch process in which an LLM diagnoses per-question failures and proposes configuration changes, guarded by automatic rollback on regression and exploration incentives during stagnation. It improves LoCoMo by 25.7% relative over the strongest baseline, and evolved configurations transfer positively across benchmarks, which suggests it discovers general retrieval principles rather than benchmark-specific tricks.
+EvolveMem closes a blind spot shared by almost every memory system: the stored content evolves, but the *retrieval* machinery (scoring functions, fusion strategies, answer-generation policies) stays frozen after deployment. EvolveMem runs a closed-loop AutoResearch process (**Evaluate → Diagnose → Propose → Guard → Repeat**) in which an LLM diagnoses per-question failures and proposes configuration changes, guarded by automatic rollback on regression and exploration incentives during stagnation. It discovers new retrieval dimensions (query decomposition, entity-swap, answer verification) not in the original design, improves LoCoMo by 25.7% relative over the strongest baseline, and its evolved configurations transfer positively across benchmarks. Full docs: [**EvolveMem →**](EvolveMem/).
 
 ### How they fit together
 
@@ -373,7 +371,14 @@ EvolveMem closes a blind spot shared by almost every memory system: the stored c
 
 </details>
 
-> 🧬 **EvolveMem** benchmark numbers are in the EvolveMem section below.
+### 🧬 EvolveMem Results
+
+| Benchmark | Backbone | EvolveMem | Best Baseline | Relative Gain |
+|-----------|----------|:---------:|:-------------:|:-------------:|
+| LoCoMo (F1) | GPT-4o | **0.543** | 0.432 (SimpleMem) | +25.7% |
+| LoCoMo (F1) | GPT-5.1 | **0.572** | 0.418 (SimpleMem) | +36.8% |
+| MemBench (Acc) | GPT-4o | **67.9%** | 57.1% | +18.9% |
+| MemBench (Acc) | GPT-5.1 | **71.4%** | 64.3% | +11.0% |
 
 ### 🧠 Omni-SimpleMem Results
 
@@ -459,34 +464,7 @@ The system then executes **parallel multi-view retrieval** across semantic, lexi
 
 **📈 Result**: 43.24% F1 score with **30× fewer tokens** than full-context methods.
 
----
-
-<div align="center">
-
-# 🧠 Omni-SimpleMem: Multimodal Memory
-
-**NEW** — SimpleMem now handles text, image, audio & video.
-
-</div>
-
-Built on three principles: **Selective Ingestion** (entropy-driven filtering for each modality), **Progressive Retrieval** (hybrid FAISS + BM25 search with pyramid token-budget expansion), and **Knowledge Graph Augmentation** (multi-hop cross-modal reasoning).
-
-> 📖 Full documentation, benchmarks, and architecture details: [**Omni-SimpleMem →**](OmniSimpleMem/)
-
----
-
-## 🧬 EvolveMem: Self-Evolving Memory
-
-Self-evolving retrieval through an LLM-driven loop (**Evaluate → Diagnose → Propose → Guard → Repeat**), discovering new retrieval dimensions (query decomposition, entity-swap, answer verification) that were not in the original design. See the [Overview](#-overview) for how it fits the stack.
-
-| Benchmark | Backbone | EvolveMem | Best Baseline | Relative Gain |
-|-----------|----------|:---------:|:-------------:|:-------------:|
-| LoCoMo (F1) | GPT-4o | **0.543** | 0.432 (SimpleMem) | +25.7% |
-| LoCoMo (F1) | GPT-5.1 | **0.572** | 0.418 (SimpleMem) | +36.8% |
-| MemBench (Acc) | GPT-4o | **67.9%** | 57.1% | +18.9% |
-| MemBench (Acc) | GPT-5.1 | **71.4%** | 64.3% | +11.0% |
-
-> 📖 Full documentation, architecture, and usage: [**EvolveMem →**](EvolveMem/)
+> 🧠 **Multimodal** (Omni-SimpleMem) and 🧬 **self-evolving retrieval** (EvolveMem) are summarized in the [Overview](#-overview); full architecture and benchmarks live in [`OmniSimpleMem/`](OmniSimpleMem/) and [`EvolveMem/`](EvolveMem/).
 
 ---
 
