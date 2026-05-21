@@ -108,7 +108,7 @@
 
 <br/>
 
-[🚀 Quick Start](#-quick-start) • [🌟 Overview](#-overview) • [📦 Installation](#-installation) • [🔌 MCP Server](#-mcp-server-text-memory) • [📝 Citation](#-citation)
+[🚀 Quick Start](#-quick-start) • [🌟 Overview](#-overview) • [📦 Installation](#-installation) • [🔌 MCP Server](#-mcp-server-text-memory) • [📊 Reproduce](#-reproduce-paper-results) • [📝 Citation](#-citation)
 
 </div>
 
@@ -135,7 +135,7 @@
 - [📦 Installation](#-installation)
 - [🐳 Docker](#-run-with-docker)
 - [🔌 MCP Server](#-mcp-server-text-memory)
-- [📊 Evaluation](#-evaluation)
+- [📊 Reproduce Paper Results](#-reproduce-paper-results)
 - [🗺️ Roadmap](#️-roadmap)
 - [📝 Citation](#-citation)
 
@@ -443,9 +443,9 @@ SimpleMem is available as a **cloud-hosted memory service** via the Model Contex
 
 ---
 
-## 📊 Evaluation
+## 📊 Reproduce Paper Results
 
-Each pillar has its own benchmark runner in its own directory. Install the benchmark extras first: `pip install -e ".[benchmark]"`.
+Reproduce the LoCoMo / MemBench / Mem-Gallery numbers from the papers. Each pillar has its own benchmark runner in its own directory. Install the benchmark extras first: `pip install -e ".[benchmark]"`.
 
 ### 📝 SimpleMem (text) — LoCoMo
 
@@ -476,15 +476,6 @@ Run from the `OmniSimpleMem/` directory (see [`OmniSimpleMem/README.md`](OmniSim
 cd OmniSimpleMem
 python benchmarks/locomo/run_locomo.py --data-path /path/to/locomo10.json --model gpt-4o
 ```
-
----
-
-### 🔬 Reproduce Paper Results
-
-Use the exact configurations in `config.py`:
-- **🚀 High-capability**: GPT-4.1-mini, Qwen3-Plus
-- **⚙️ Efficient**: Qwen2.5-1.5B, Qwen2.5-3B
-- **🔍 Embedding**: Qwen3-Embedding-0.6B (1024-d)
 
 ---
 
